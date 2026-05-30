@@ -1,0 +1,77 @@
+# =============================================
+# Decap CMS — конфігурація для блогу Marianasense
+# =============================================
+
+backend:
+  name: git-gateway
+  branch: main
+  # повідомлення коміту при публікації / редагуванні
+  commit_messages:
+    create: 'Блог: створено "{{slug}}"'
+    update: 'Блог: оновлено "{{slug}}"'
+    delete: 'Блог: видалено "{{slug}}"'
+    uploadMedia: 'Медіа: завантажено "{{path}}"'
+    deleteMedia: 'Медіа: видалено "{{path}}"'
+
+# мова інтерфейсу
+locale: 'uk'
+
+# куди CMS зберігає завантажені зображення
+media_folder: 'images/blog'
+public_folder: '/images/blog'
+
+# показувати чернетки/редактуру перед публікацією
+publish_mode: editorial_workflow
+
+# ===============
+# КОЛЕКЦІЇ
+# ===============
+collections:
+  # ----- Блог -----
+  - name: 'blog'
+    label: 'Блог'
+    label_singular: 'Стаття'
+    folder: 'content/blog'
+    create: true
+    slug: '{{slug}}'
+    extension: 'md'
+    format: 'frontmatter'
+    summary: '{{title}} — {{date | date("DD.MM.YYYY")}}'
+    sortable_fields: ['date', 'title', 'category']
+    view_filters:
+      - label: 'Тривога'
+        field: category
+        pattern: 'тривога'
+      - label: 'Травма'
+        field: category
+        pattern: 'травма'
+      - label: 'Арт-терапія'
+        field: category
+        pattern: 'арт-терапія'
+      - label: 'Стосунки'
+        field: category
+        pattern: 'стосунки'
+      - label: 'Вигорання'
+        field: category
+        pattern: 'вигорання'
+      - label: 'Загальне'
+        field: category
+        pattern: 'загальне'
+    fields:
+      - { label: 'Заголовок', name: 'title', widget: 'string', hint: 'Назва статті — показується в картці та як <h1>' }
+      - { label: 'Slug (URL)', name: 'slug', widget: 'string', hint: 'Латиницею через дефіс, напр. yak-rozpiznaty-trivogu' }
+      - { label: 'Дата публікації', name: 'date', widget: 'datetime', date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD' }
+      - label: 'Категорія'
+        name: 'category'
+        widget: 'select'
+        options:
+          - { label: 'Тривога', value: 'тривога' }
+          - { label: 'Травма', value: 'травма' }
+          - { label: 'Арт-терапія', value: 'арт-терапія' }
+          - { label: 'Стосунки', value: 'стосунки' }
+          - { label: 'Вигорання', value: 'вигорання' }
+          - { label: 'Загальне', value: 'загальне' }
+        default: 'загальне'
+      - { label: 'Обкладинка', name: 'cover', widget: 'image', required: false, hint: 'Зображення-обкладинка картки (16:10). Необов\'язкове.' }
+      - { label: 'Короткий опис (excerpt)', name: 'excerpt', widget: 'text', hint: 'Підзаголовок у картці на головній. 1–2 речення.' }
+      - { label: 'Текст статті', name: 'body', widget: 'markdown' }
