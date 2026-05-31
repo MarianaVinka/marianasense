@@ -1,0 +1,38 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: uk
+
+media_folder: "static/blog-images"
+public_folder: "/blog-images"
+
+collections:
+  - name: "blog"
+    label: "Статті блогу"
+    label_singular: "Стаття"
+    folder: "src/blog"
+    create: true
+    slug: "{{fields.seoSlug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string", hint: "Назва статті — великий заголовок на сторінці" }
+      - { label: "Дата", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+      - label: "Категорія"
+        name: "category"
+        widget: "select"
+        options: ["Тривога", "Травма", "Арт-терапія", "Психодрама", "Стосунки", "Вигорання", "Загальне"]
+      - { label: "Час читання", name: "readingTime", widget: "string", required: false, default: "5 хв читання" }
+      - { label: "Обкладинка", name: "cover", widget: "image", required: false, hint: "Головне фото статті. Показується вгорі, у списку блогу і при поширенні в соцмережах" }
+      - { label: "Текст статті", name: "body", widget: "markdown", hint: "Пишіть текст. Кнопкою із зображенням можна вставляти фото прямо в текст" }
+
+      - label: "🔍 SEO-панель"
+        name: "seo"
+        widget: "object"
+        collapsed: false
+        hint: "Як стаття виглядатиме в Google і соцмережах"
+        fields:
+          - { label: "Короткий опис (для прев'ю і Google)", name: "excerpt", widget: "text", hint: "1–2 речення. Показується у списку блогу і під назвою в результатах пошуку" }
+          - { label: "Заголовок для Google (необов'язково)", name: "metaTitle", widget: "string", required: false, hint: "Якщо порожньо — береться звичайний заголовок статті" }
+          - { label: "Адреса сторінки (латиницею, через дефіс)", name: "seoSlug", widget: "string", hint: "Напр. yak-rozpiznaty-trivogu → marianasense.com/blog/yak-rozpiznaty-trivogu/" }

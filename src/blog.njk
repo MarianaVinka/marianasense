@@ -1,0 +1,99 @@
+---
+permalink: "/blog/"
+title: "Блог"
+---
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Блог — Мар'яна Вербицька | Нотатки терапевта</title>
+  <meta name="description" content="Статті про тривогу, травму, арт-терапію, стосунки та вигорання. Нотатки психолога-консультанта Мар'яни Вербицької.">
+  <link rel="canonical" href="https://marianasense.com/blog/">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta property="og:title" content="Блог — Мар'яна Вербицька">
+  <meta property="og:description" content="Статті про тривогу, травму, арт-терапію та вигорання.">
+  <meta property="og:image" content="https://marianasense.com/og-image-v2.jpg">
+  <meta property="og:url" content="https://marianasense.com/blog/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:#f0ebe3; --green-sage:#7a9485; --green-dark:#3d5245;
+      --green-light:#e3ede7; --forest:#2e3830; --text-body:#556159;
+      --text-muted:#7a9485; --border:#d8d0c4;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--cream); font-family:'DM Sans',sans-serif; color:var(--text-body); font-weight:300; line-height:1.7; }
+    header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 6vw; border-bottom:1px solid var(--border);
+    }
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .logo img { width:34px; height:34px; }
+    .logo span { font-family:'Cormorant Garamond',serif; font-size:22px; color:var(--forest); font-weight:500; }
+    .logo em { color:var(--green-sage); font-style:italic; }
+    .nav-back {
+      font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+      text-decoration:none; color:var(--green-dark); border:1px solid var(--green-dark);
+      padding:9px 22px; border-radius:30px; transition:all 0.2s;
+    }
+    .nav-back:hover { background:var(--green-dark); color:var(--cream); }
+    .intro { max-width:760px; margin:0 auto; padding:72px 24px 32px; text-align:center; }
+    .intro .tag { font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--green-sage); }
+    .intro h1 { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(34px,7vw,56px); color:var(--forest); margin:14px 0 18px; }
+    .intro p { font-size:17px; max-width:560px; margin:0 auto; }
+    .posts { max-width:760px; margin:0 auto; padding:24px 24px 80px; }
+    .post-card {
+      display:block; text-decoration:none; padding:28px 0; border-bottom:1px solid var(--border);
+      transition:opacity 0.2s;
+    }
+    .post-card:hover { opacity:0.7; }
+    .post-card .pc-meta { font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--green-sage); margin-bottom:8px; }
+    .post-card .pc-meta .cat { color:var(--green-dark); font-weight:500; }
+    .post-card h2 { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:27px; color:var(--forest); margin-bottom:8px; line-height:1.2; }
+    .post-card p { font-size:15px; color:var(--text-body); }
+    footer { border-top:1px solid var(--border); padding:40px 6vw; text-align:center; font-size:13px; color:var(--text-muted); }
+    footer a { color:var(--green-dark); text-decoration:none; margin:0 8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="/">
+      <img src="/favicon-512.png" alt="Логотип Мар'яна Вербицька">
+      <span>Мар'яна <em>Вербицька</em></span>
+    </a>
+    <a class="nav-back" href="/">← На головну</a>
+  </header>
+
+  <div class="intro">
+    <div class="tag">Блог · нотатки терапевта</div>
+    <h1>Те, що допомагає бачити себе</h1>
+    <p>Статті про тривогу, травматичний досвід, арт-терапію, стосунки та вигорання. Без зайвої теорії — про те, що працює в реальному житті.</p>
+  </div>
+
+  <div class="posts">
+    {% for post in collections.posts %}
+    <a class="post-card" href="{{ post.url }}">
+      <div class="pc-meta">
+        <span class="cat">{{ post.data.category }}</span> ·
+        <time datetime="{{ post.date | dateISO }}">{{ post.date | dateUkr }}</time>
+        {% if post.data.readingTime %} · {{ post.data.readingTime }}{% endif %}
+      </div>
+      <h2>{{ post.data.title }}</h2>
+      <p>{{ post.data.seo.excerpt }}</p>
+    </a>
+    {% endfor %}
+  </div>
+
+  <footer>
+    <div>
+      <a href="/">Головна</a>
+      <a href="https://instagram.com/maryana_vinka">Instagram</a>
+      <a href="https://t.me/Maryana_Vi">Telegram</a>
+    </div>
+    <p style="margin-top:16px;">© 2026 marianasense.com</p>
+  </footer>
+</body>
+</html>
