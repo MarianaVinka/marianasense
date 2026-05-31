@@ -1,25 +1,30 @@
 # ===============================================
 # Netlify configuration — marianasense.com
-# Сайт статичний (HTML/CSS/JS), без збірки.
+# Сайт збирається через Eleventy (11ty).
 # ===============================================
 
 [build]
-  # Каталог із готовим сайтом — корінь репозиторію
-  publish = "."
-  # Команди збірки немає — сайт статичний
-  command = ""
+  # Eleventy кладе готовий сайт у папку _site
+  publish = "_site"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Редірект /admin → /admin/
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+  force = true
 
 # ===============================================
 # Identity + Git Gateway (потрібно для Decap CMS)
-# ===============================================
-# ВАЖЛИВО: окрім цього треба вручну увімкнути
+# ВАЖЛИВО: окрім цього треба вручну увімкнути в Netlify:
 #   1. Site → Identity → Enable Identity
 #   2. Identity → Services → Git Gateway → Enable
-#   3. (опційно) Identity → Registration → Invite only
+#   3. Identity → Registration → Invite only (і запросити себе)
 # ===============================================
-
-[template.environment]
-  IDENTITY_INSTANCE_ID = "marianasense"
 
 # Заголовки безпеки
 [[headers]]
@@ -29,7 +34,6 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Для /admin/ дозволяємо завантаження CMS-скриптів з unpkg
 [[headers]]
   for = "/admin/*"
   [headers.values]

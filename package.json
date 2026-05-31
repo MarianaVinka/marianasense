@@ -1,0 +1,14 @@
+{
+  "name": "marianasense",
+  "version": "1.0.0",
+  "description": "Сайт Мар'яни Вербицької — психолог, арт-терапевт",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "luxon": "^3.4.4",
+    "markdown-it": "^14.1.0"
+  }
+}
