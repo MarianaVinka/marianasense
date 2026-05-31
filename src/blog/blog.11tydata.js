@@ -1,4 +1,4 @@
 module.exports = {
-  layout: "post.njk",
+  layout: "post-layout.njk",
   permalink: "/blog/{{ page.fileSlug }}/"
 };
